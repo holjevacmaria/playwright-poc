@@ -1,5 +1,5 @@
 import { test, expect } from "@playwright/test";
-import { TestClass } from "./pages/test.page";
+import { TestClass } from "../pages/test.page";
 
 test.describe("Test describe", () => {
   test.beforeEach(({ page }) => {

@@ -1,11 +1,14 @@
 {
   "name": "playwright-poc",
   "version": "1.0.0",
-  "description": "",
+  "description": "This project is used to showcase some of the basic Playwright capabilities.",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "playwright": "npx playwright test",
+    "playwright:debug": "npx playwright test --headed"
+  },
   "keywords": [],
-  "author": "",
+  "author": "Maria Holjevac",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.40.1",
