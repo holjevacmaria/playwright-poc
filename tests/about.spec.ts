@@ -1,13 +1,19 @@
 import { test, expect } from "@playwright/test";
-import { TestClass } from "../pages/test.page";
+import { Homepage } from "../pages/homepage.page";
+import { About } from "../pages/about.page";
 
 test.describe("Test describe", () => {
   test.beforeEach(({ page }) => {
-    let testClass: TestClass;
+    let homepage: Homepage;
+    let about: About;
   });
 
   test("Initial test", async ({ page }) => {
-    const testClass = new TestClass(page);
-    await testClass.goto();
+    const homepage = new Homepage(page);
+    const about = new About(page);
+    await homepage.goto();
+    await page.pause();
+    await homepage.aboutBtn.click();
+    await expect(about.modalDialog).toHaveScreenshot("about-modal.png");
   });
 });
