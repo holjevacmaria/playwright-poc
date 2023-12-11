@@ -19,7 +19,9 @@ export class Homepage {
   readonly laptopsCategory: Locator;
   readonly monitorsCategory: Locator;
   readonly productItems: Locator;
-  readonly singleProduct: Locator;
+  readonly phoneProduct: Locator;
+  readonly laptopProduct: Locator;
+  readonly monitorProduct: Locator;
   readonly AddToCartBtn: Locator;
 
   readonly footer: Locator;
@@ -32,7 +34,7 @@ export class Homepage {
     this.homeBtn = page.getByRole("link", { name: "Home (current)" });
     this.contactBtn = page.getByRole("link", { name: "Contact" });
     this.aboutBtn = page.getByRole("link", { name: "About us" });
-    this.cartBtn = page.getByRole("link", { name: "Cart" });
+    this.cartBtn = page.getByRole("link", { name: "Cart", exact: true });
     this.logInBtn = page.getByRole("link", { name: "Log in" });
     this.signUpBtn = page.getByRole("link", { name: "Sign up" });
 
@@ -43,7 +45,9 @@ export class Homepage {
     this.laptopsCategory = page.getByRole("link", { name: "Laptops" });
     this.monitorsCategory = page.getByRole("link", { name: "Monitors" });
     this.productItems = page.locator("div.row").first();
-    this.singleProduct = page.getByRole("link", { name: "Samsung galaxy s6" });
+    this.phoneProduct = page.getByRole("link", { name: "Samsung galaxy s6" });
+    this.laptopProduct = page.getByRole("link", { name: "Sony vaio i5" });
+    this.monitorProduct = page.getByRole("link", { name: "Apple monitor" });
     this.AddToCartBtn = page.getByRole("link", { name: "Add to cart" });
     this.footer = page.locator("#footc");
   }

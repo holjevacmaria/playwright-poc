@@ -44,7 +44,7 @@ test.describe("Homepage", () => {
 
   test("Verify single product item page", async ({ page }) => {
     await homepage.phonesCategory.click();
-    await homepage.singleProduct.click();
+    await homepage.phoneProduct.click();
     await expect(homepage.AddToCartBtn).toBeVisible();
     await expect(page).toHaveScreenshot("single-product-page.png");
   });
