@@ -1,8 +1,9 @@
 import { test, expect } from "@playwright/test";
 import { Homepage } from "../pages/homepage.page";
 
-test.describe("Homepage tests", () => {
+test.describe("Homepage", () => {
   let homepage: Homepage;
+
   test.beforeEach(async ({ page }) => {
     homepage = new Homepage(page);
     await homepage.goto();

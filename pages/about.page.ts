@@ -4,6 +4,7 @@ export class About {
   readonly page: Page;
   readonly modalDialog: Locator;
   readonly modalCloseBtn: Locator;
+  readonly modalXBtn: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -11,5 +12,6 @@ export class About {
     this.modalCloseBtn = page
       .locator("#videoModal")
       .getByText("Close", { exact: true });
+    this.modalXBtn = page.locator("#videoModal").getByLabel("Close");
   }
 }

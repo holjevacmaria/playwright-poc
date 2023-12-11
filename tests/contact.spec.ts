@@ -2,9 +2,10 @@ import { test, expect } from "@playwright/test";
 import { Homepage } from "../pages/homepage.page";
 import { Contact } from "../pages/contact.page";
 
-test.describe("Test describe", () => {
+test.describe("Contact modal", () => {
   let homepage: Homepage;
   let contact: Contact;
+
   test.beforeEach(async ({ page }) => {
     homepage = new Homepage(page);
     contact = new Contact(page);
@@ -27,6 +28,7 @@ test.describe("Test describe", () => {
     });
     await contact.sendMsgBtn.click();
   });
+
   test("Verify that the modal can be closed on X btn", async ({ page }) => {
     await homepage.contactBtn.click();
     await contact.modalXBtn.click();
