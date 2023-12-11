@@ -19,6 +19,8 @@ export class Homepage {
   readonly laptopsCategory: Locator;
   readonly monitorsCategory: Locator;
   readonly productItems: Locator;
+  readonly singleProduct: Locator;
+  readonly AddToCartBtn: Locator;
 
   readonly footer: Locator;
 
@@ -41,12 +43,13 @@ export class Homepage {
     this.laptopsCategory = page.getByRole("link", { name: "Laptops" });
     this.monitorsCategory = page.getByRole("link", { name: "Monitors" });
     this.productItems = page.locator("div.row").first();
-
+    this.singleProduct = page.getByRole("link", { name: "Samsung galaxy s6" });
+    this.AddToCartBtn = page.getByRole("link", { name: "Add to cart" });
     this.footer = page.locator("#footc");
   }
 
   async goto() {
-    await this.page.goto("https://www.demoblaze.com/index.html", {
+    await this.page.goto("https://www.demoblaze.com/", {
       waitUntil: "load",
     });
   }

@@ -25,8 +25,6 @@ test.describe("Test describe", () => {
   }) => {
     const homepage = new Homepage(page);
     await homepage.goto();
-    await homepage.cartBtn.click();
-    await expect(page).toHaveURL("https://www.demoblaze.com/cart.html");
     await homepage.logo.click();
     await expect(page).toHaveURL("https://www.demoblaze.com/index.html");
   });
@@ -44,6 +42,14 @@ test.describe("Test describe", () => {
     await expect(homepage.productItems).toHaveScreenshot("laptop-items.png");
     await homepage.monitorsCategory.click();
     await expect(homepage.productItems).toHaveScreenshot("monitor-items.png");
+  });
+  test("Verify single product item page", async ({ page }) => {
+    const homepage = new Homepage(page);
+    await homepage.goto();
+    await homepage.phonesCategory.click();
+    await homepage.singleProduct.click();
+    await expect(homepage.AddToCartBtn).toBeVisible();
+    await expect(page).toHaveScreenshot("single-product-page.png");
   });
   test("Verify the font and color of the text", async ({ page }) => {
     const homepage = new Homepage(page);
