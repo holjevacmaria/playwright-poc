@@ -15,6 +15,7 @@ export class Cart {
   readonly closeBtn: Locator;
   readonly closeXBtn: Locator;
   readonly purchaseBtn: Locator;
+  readonly successPopup: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -33,6 +34,7 @@ export class Cart {
     this.closeBtn = page.getByLabel("Place order").getByText("Close");
     this.closeXBtn = page.getByLabel("Place order").getByLabel("Close");
     this.purchaseBtn = page.getByRole("button", { name: "Purchase" });
+    this.successPopup = page.locator("div.sweet-alert.showSweetAlert.visible");
   }
 
   async goto() {
