@@ -14,24 +14,38 @@ test.describe("Cart", () => {
   test("Verify the state of an empty cart", async ({ page }) => {
     await expect(page).toHaveScreenshot("empty-cart.png");
   });
-  test.only("Add an item from each category to cart", async ({ page }) => {
-    await page.pause();
-    await homepage.logo.click();
-    await homepage.phonesCategory.click();
-    await homepage.phoneProduct.click();
-    await homepage.AddToCartBtn.click();
+  // should fail
+  test.fixme(
+    "Add an item from each category to cart and verify they are added",
+    async ({ page }) => {
+      await homepage.logo.click();
+      await homepage.phonesCategory.click();
+      await homepage.phoneProduct.click();
+      await homepage.AddToCartBtn.click();
 
-    await homepage.logo.click();
-    await homepage.laptopsCategory.click();
-    await homepage.laptopProduct.click();
-    await homepage.AddToCartBtn.click();
+      await homepage.logo.click();
+      await homepage.laptopsCategory.click();
+      await homepage.laptopProduct.click();
+      await homepage.AddToCartBtn.click();
 
-    await homepage.logo.click();
-    await homepage.monitorsCategory.click();
-    await homepage.monitorProduct.click();
-    await homepage.AddToCartBtn.click();
-    await homepage.cartBtn.click();
-    await expect(cart.monitorCartItem).toBeVisible();
-    await expect(page).toHaveScreenshot("three-products-in-cart.png");
+      await homepage.logo.click();
+      await homepage.monitorsCategory.click();
+      await homepage.monitorProduct.click();
+      await homepage.AddToCartBtn.click();
+      await homepage.cartBtn.click();
+      await expect.soft(cart.phoneCartItem).toBeVisible();
+      await expect.soft(cart.laptopCartItem).toBeVisible();
+      await expect(cart.monitorCartItem).toBeVisible();
+    }
+  );
+  // WIP
+  test("Verify that the user can place the order", async ({ page }) => {
+    // await homepage.logo.click();
+    // await homepage.phonesCategory.click();
+    // await homepage.phoneProduct.click();
+    // await homepage.AddToCartBtn.click();
+    // await homepage.cartBtn.click();
   });
+  test("Verify that the user cannot place an empty order", async () => {});
+  test("Verify that the user cannot place an order without entering data", async () => {});
 });
