@@ -1,23 +1,21 @@
-import { test, expect } from "@playwright/test";
-import { Homepage } from "../pages/homepage.page";
-import { Contact } from "../pages/contact.page";
+import { test } from "../tests/fixtures/basePage";
+import { expect } from "@playwright/test";
 
 test.describe("Contact modal", () => {
-  let homepage: Homepage;
-  let contact: Contact;
-
-  test.beforeEach(async ({ page }) => {
-    homepage = new Homepage(page);
-    contact = new Contact(page);
+  test.beforeEach(async ({ homepage }) => {
     await homepage.goto();
   });
 
-  test("Verify that the modal is displayed correctly", async ({ page }) => {
+  test("Verify that the modal is displayed correctly", async ({ homepage }) => {
     await homepage.contactBtn.click();
     //await expect(contact.contactModal).toHaveScreenshot("contact-modal.png");
   });
 
-  test("Populate input with data and send the message", async ({ page }) => {
+  test("Populate input with data and send the message", async ({
+    homepage,
+    contact,
+    page,
+  }) => {
     await homepage.contactBtn.click();
     await contact.emailInput.fill("test@test.com");
     await contact.nameInput.fill("Test");
@@ -29,14 +27,18 @@ test.describe("Contact modal", () => {
     await contact.sendMsgBtn.click();
   });
 
-  test("Verify that the modal can be closed on X btn", async ({ page }) => {
+  test("Verify that the modal can be closed on X btn", async ({
+    homepage,
+    contact,
+  }) => {
     await homepage.contactBtn.click();
     await contact.modalXBtn.click();
     await expect(contact.contactModal).not.toBeVisible();
   });
   // should fail
   test("Once the modal is closed and opened again, the form inputs are reset", async ({
-    page,
+    homepage,
+    contact,
   }) => {
     await homepage.contactBtn.click();
     await contact.emailInput.fill("test@test.com");

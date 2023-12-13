@@ -1,23 +1,18 @@
-import { test, expect } from "@playwright/test";
-import { Homepage } from "../pages/homepage.page";
-import { About } from "../pages/about.page";
+import { test } from "../tests/fixtures/basePage";
+import { expect } from "@playwright/test";
 
 test.describe("About modal", () => {
-  let homepage: Homepage;
-  let about: About;
-
-  test.beforeEach(async ({ page }) => {
-    homepage = new Homepage(page);
-    about = new About(page);
+  test.beforeEach(async ({ homepage }) => {
     await homepage.goto();
   });
 
-  test("Verify elements on About modal", async ({ page }) => {
+  test("Verify elements on About modal", async ({ homepage }) => {
     await homepage.aboutBtn.click();
     //await expect(about.modalDialog).toHaveScreenshot("about-modal.png");
   });
   test("Verify that the modal can be closed on Close and X button", async ({
-    page,
+    homepage,
+    about,
   }) => {
     await homepage.aboutBtn.click();
     await expect(about.modalDialog).toBeVisible();

@@ -1,13 +1,10 @@
-import { test, expect } from "@playwright/test";
-import { SignUp } from "../pages/signUp.page";
+import { test } from "../tests/fixtures/basePage";
+import { expect } from "@playwright/test";
 
 test.describe("Sign up", () => {
-  test.beforeEach(({ page }) => {
-    let signUp: SignUp;
-  });
-
-  test("Initial test", async ({ page }) => {
-    const signUp = new SignUp(page);
+  test.beforeEach(async ({ signUp }) => {
     await signUp.goto();
   });
+
+  test("Initial test", async ({ signUp }) => {});
 });

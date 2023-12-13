@@ -1,16 +1,13 @@
-import { test, expect } from "@playwright/test";
-import { Homepage } from "../pages/homepage.page";
+import { test } from "../tests/fixtures/basePage";
+import { expect } from "@playwright/test";
 
 test.describe("Homepage", () => {
-  let homepage: Homepage;
-
-  test.beforeEach(async ({ page }) => {
-    homepage = new Homepage(page);
+  test.beforeEach(async ({ homepage }) => {
     await homepage.goto();
   });
 
   test("Verify visibility of general components on the homepage", async ({
-    page,
+    homepage,
   }) => {
     // await expect(page).toHaveScreenshot("initial-state.png", {
     //   mask: [homepage.slider],
@@ -23,6 +20,7 @@ test.describe("Homepage", () => {
   });
 
   test("Verify that clicking on the logo leads to the homepage", async ({
+    homepage,
     page,
   }) => {
     await homepage.logo.click();
@@ -30,7 +28,7 @@ test.describe("Homepage", () => {
   });
 
   test("Verify that clicking a certain category filters the items", async ({
-    page,
+    homepage,
   }) => {
     await homepage.categories.click();
     //await expect(homepage.productItems).toHaveScreenshot("all-items.png");
@@ -42,14 +40,14 @@ test.describe("Homepage", () => {
     // await expect(homepage.productItems).toHaveScreenshot("monitor-items.png");
   });
 
-  test("Verify single product item page", async ({ page }) => {
+  test("Verify single product item page", async ({ homepage }) => {
     await homepage.phonesCategory.click();
     await homepage.phoneProduct.click();
     await expect(homepage.AddToCartBtn).toBeVisible();
     // await expect(page).toHaveScreenshot("single-product-page.png");
   });
 
-  test("Verify the font and color of the text", async ({ page }) => {
+  test("Verify the font and color of the text", async ({ homepage }) => {
     await expect(homepage.phonesCategory).toHaveCSS("font-family", "LatoWeb");
     // PW accepts color values only in rgb!
     await expect(homepage.phonesCategory).toHaveCSS(

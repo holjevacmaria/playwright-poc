@@ -1,13 +1,8 @@
-import { test, expect } from "@playwright/test";
-import { Homepage } from "../pages/homepage.page";
-import { Cart } from "../pages/cart.page";
+import { test } from "../tests/fixtures/basePage";
+import { expect } from "@playwright/test";
 
 test.describe("Cart", () => {
-  let homepage: Homepage;
-  let cart: Cart;
-  test.beforeEach(async ({ page }) => {
-    cart = new Cart(page);
-    homepage = new Homepage(page);
+  test.beforeEach(async ({ cart }) => {
     await cart.goto();
   });
 
@@ -17,7 +12,7 @@ test.describe("Cart", () => {
   // should fail
   test.fixme(
     "Add an item from each category to cart and verify they are added",
-    async ({ page }) => {
+    async ({ homepage, cart }) => {
       await homepage.logo.click();
       await homepage.phonesCategory.click();
       await homepage.phoneProduct.click();
@@ -40,9 +35,9 @@ test.describe("Cart", () => {
   );
   // WIP
   test("Verify that the user can successfully place the order", async ({
-    page,
+    homepage,
+    cart,
   }) => {
-    await page.pause();
     await homepage.logo.click();
     await homepage.monitorsCategory.click();
     await homepage.monitorProduct.click();
