@@ -1,7 +1,9 @@
 import { test } from "../tests/fixtures/basePage";
 import { expect } from "@playwright/test";
+import dotenv from "dotenv";
 
 test.describe("Integration tests", () => {
+  dotenv.config();
   test.beforeEach(async ({ homepage }) => {
     await homepage.goto();
   });
@@ -12,13 +14,14 @@ test.describe("Integration tests", () => {
     page,
   }) => {
     await homepage.logInBtn.click();
-    await logIn.userNameInput.fill("maria9");
-    await logIn.passwordInput.fill("pussycat123");
+    await logIn.userNameInput.fill(`${process.env.USERNAME}`);
+    await logIn.passwordInput.fill(`${process.env.PASSWORD}`);
     await logIn.logInBtn.click();
     const checkRequest = await page.waitForRequest((request) =>
       request.url().includes("/check")
     );
-    expect(checkRequest.postDataJSON().token).toContain("bWFyaWE5MTcwMzI");
+    expect(checkRequest.postDataJSON().token).toContain("bWFyaWE5MTcwMz");
+    await expect(page.locator("#nameofuser")).toBeVisible();
   });
 
   test("Verify that the content filters once the user chooses a category", async ({
