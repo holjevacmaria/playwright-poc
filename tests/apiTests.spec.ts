@@ -8,7 +8,7 @@ test.describe("API tests", () => {
     await homepage.goto();
   });
 
-  test("Should make an API request using Playwright fetch", async ({
+  test("Should make an API request to entires endpoint", async ({
     homepage,
     logIn,
     page,
@@ -21,7 +21,19 @@ test.describe("API tests", () => {
     expect(response).toHaveProperty("LastEvaluatedKey");
   });
 
-  test("API 2", async ({ homepage, page }) => {});
+  test("Should make an API request to config.json endpoint", async ({
+    homepage,
+    page,
+  }) => {
+    const response = await page.evaluate(async () => {
+      const apiResponse = await fetch("https://www.demoblaze.com/config.json");
+      return apiResponse.json();
+    });
+    console.log(response);
+    expect(response).toHaveProperty("API_URL");
+    expect(response).toHaveProperty("HLS_URL");
+    // expect(response.cat).toHaveText("notebook");
+  });
   test("API 3", async ({ homepage, page }) => {});
   test("API 4", async ({ homepage, page }) => {});
 });
