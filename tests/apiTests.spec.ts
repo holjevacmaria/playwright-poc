@@ -29,7 +29,10 @@ test.describe("API tests", () => {
       const apiResponse = await fetch("https://www.demoblaze.com/config.json");
       return apiResponse.json();
     });
-    console.log(response);
+    expect(response).toStrictEqual({
+      API_URL: "https://api.demoblaze.com",
+      HLS_URL: "https://hls.demoblaze.com",
+    });
     expect(response).toHaveProperty("API_URL");
     expect(response).toHaveProperty("HLS_URL");
     // expect(response.cat).toHaveText("notebook");
