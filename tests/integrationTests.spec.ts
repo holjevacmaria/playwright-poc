@@ -37,4 +37,13 @@ test.describe("Integration tests", () => {
       cat: "monitor",
     });
   });
+
+  test("Verify that the URL changes once the User clicks on Cart", async ({
+    homepage,
+    page,
+  }) => {
+    expect(page.url()).toBe("https://www.demoblaze.com/");
+    await homepage.cartBtn.click();
+    expect(page.url()).toBe("https://www.demoblaze.com/cart.html");
+  });
 });
