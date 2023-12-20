@@ -36,7 +36,31 @@ test.describe("Mocked data tests", () => {
     expect(content).toContain("Intercepted request");
   });
 
-  test("2", async ({ homepage, page }) => {});
+  test("Intercept the /entries request and change status to 500", async ({
+    homepage,
+    page,
+  }) => {
+    page.route("https://api.demoblaze.com/entries", (route) => {
+      route.fulfill({
+        status: 500,
+        contentType: "application/json",
+        body: JSON.stringify({ error: "Internal Server Error" }),
+      });
+    });
+    // since the entries ep was not successfull, there is no product data on the screen
+    await expect(homepage.phoneProduct).not.toBeVisible();
+  });
 
-  test("3", async ({ homepage, page }) => {});
+  test("Intercept a certain category and change data for all items", async ({
+    homepage,
+    page,
+  }) => {
+    page.route("https://api.demoblaze.com/bycat", (route) => {
+      route.fulfill({
+        path: "tests/mock/laptopCategoryProducts.json",
+      });
+    });
+    await homepage.laptopsCategory.click();
+    // add assertions
+  });
 });
