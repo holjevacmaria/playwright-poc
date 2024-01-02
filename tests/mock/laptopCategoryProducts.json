@@ -1,0 +1,52 @@
+{
+  "Items": [
+    {
+      "cat": "notebook",
+      "desc": "A unique corrupted description",
+      "id": 8,
+      "img": "imgs/asusm.jpg",
+      "price": 790.0,
+      "title": "Unique Title"
+    },
+    {
+      "cat": "notebook",
+      "desc": "This description of a product has been corrupted.",
+      "id": 9,
+      "img": "imgs/asusm.jpg",
+      "price": 790.0,
+      "title": "Test Title"
+    },
+    {
+      "cat": "notebook",
+      "desc": "This description of a product has been corrupted.",
+      "id": 11,
+      "img": "imgs/asusm.jpg",
+      "price": 700.0,
+      "title": "Test Title"
+    },
+    {
+      "cat": "notebook",
+      "desc": "This description of a product has been corrupted.",
+      "id": 12,
+      "img": "imgs/asusm.jpg",
+      "price": 700.0,
+      "title": "Test Title"
+    },
+    {
+      "cat": "notebook",
+      "desc": "This description of a product has been corrupted.",
+      "id": 13,
+      "img": "imgs/asusm.jpg",
+      "price": 700.0,
+      "title": "Test Title"
+    },
+    {
+      "cat": "notebook",
+      "desc": "This description of a product has been corrupted.",
+      "id": 15,
+      "img": "imgs/asusm.jpg",
+      "price": 1100.0,
+      "title": "Test Title"
+    }
+  ]
+}

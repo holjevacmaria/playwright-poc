@@ -1,9 +1,7 @@
 import { test } from "../tests/fixtures/basePage";
 import { expect } from "@playwright/test";
-import dotenv from "dotenv";
 
 test.describe("Mocked data tests", () => {
-  dotenv.config();
   test.beforeEach(async ({ homepage }) => {
     await homepage.goto();
   });
@@ -61,6 +59,44 @@ test.describe("Mocked data tests", () => {
       });
     });
     await homepage.laptopsCategory.click();
-    // add assertions
+    await expect(
+      page.getByRole("link", { name: "Unique Title" })
+    ).toBeVisible();
+  });
+
+  test("Intercept the viewcart endpoint and change the given data", async ({
+    homepage,
+    page,
+  }) => {
+    await homepage.cartBtn.click();
+    await page.route("https://api.demoblaze.com/viewcart", (route) => {
+      const mockData = {
+        Items: [
+          {
+            cookie: "maria9",
+            id: "f3e1b78e-e617-173d-facb-b6c68be6d0df",
+            prod_id: 13,
+          },
+          {
+            cookie: "maria9",
+            id: "fb07b1f5-f3a8-3f07-3af6-0511878d6499",
+            prod_id: 10,
+          },
+        ],
+      };
+
+      route.fulfill({
+        status: 200,
+        contentType: "application/json",
+        body: JSON.stringify(mockData),
+      });
+    });
+
+    await expect(
+      page.getByRole("cell", { name: "Apple monitor" })
+    ).toBeVisible();
+    await expect(
+      page.getByRole("cell", { name: "Dell 15.6 Inch" })
+    ).toBeVisible();
   });
 });
