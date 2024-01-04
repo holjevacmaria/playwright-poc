@@ -6,7 +6,7 @@ test.describe("Mocked data tests", () => {
     await homepage.goto();
   });
 
-  test("Intercept the View request and validate that new data is visible", async ({
+  test("Intercept the /view request and validate that mocked data is visible", async ({
     homepage,
     page,
   }) => {
@@ -29,11 +29,11 @@ test.describe("Mocked data tests", () => {
         body: JSON.stringify(mockData),
       });
     });
-
+    // Validate the data
     const content = await page.textContent("#tbodyid h2");
     expect(content).toContain("Intercepted request");
   });
-
+  // flaky - investigate a bit more
   test("Intercept the /entries request and change status to 500", async ({
     homepage,
     page,
@@ -45,6 +45,12 @@ test.describe("Mocked data tests", () => {
         body: JSON.stringify({ error: "Internal Server Error" }),
       });
     });
+    // Wait for the intercepted response
+    const interceptedResponse = await page.waitForResponse((response) =>
+      response.url().includes("https://api.demoblaze.com/entries")
+    );
+    // Check if the status code is indeed 500
+    expect(interceptedResponse.status()).toBe(500);
     // since the entries ep was not successfull, there is no product data on the screen
     await expect(homepage.phoneProduct).not.toBeVisible();
   });

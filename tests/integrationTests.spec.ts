@@ -20,7 +20,7 @@ test.describe("Integration tests", () => {
     const checkRequest = await page.waitForRequest((request) =>
       request.url().includes("/check")
     );
-    expect(checkRequest.postDataJSON().token).toContain("bWFyaWE5MTcwMz");
+    expect(checkRequest.postDataJSON().token).toContain("bWFyaWE5MTcw");
     await expect(page.locator("#nameofuser")).toBeVisible();
   });
 
@@ -45,5 +45,21 @@ test.describe("Integration tests", () => {
     expect(page.url()).toBe("https://www.demoblaze.com/");
     await homepage.cartBtn.click();
     expect(page.url()).toBe("https://www.demoblaze.com/cart.html");
+  });
+
+  test("Verify URL change on product click + /view request", async ({
+    homepage,
+    page,
+  }) => {
+    expect(page.url()).toBe("https://www.demoblaze.com/");
+
+    await homepage.phoneProduct.click();
+    const checkRequest = await page.waitForRequest((request) =>
+      request.url().includes("/view")
+    );
+    expect(checkRequest.postDataJSON()).toEqual({
+      id: "1",
+    });
+    expect(page.url()).toBe("https://www.demoblaze.com/prod.html?idp_=1");
   });
 });
