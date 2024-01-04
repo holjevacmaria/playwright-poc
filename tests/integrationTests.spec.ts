@@ -1,6 +1,7 @@
 import { test } from "../tests/fixtures/basePage";
 import { expect } from "@playwright/test";
 import dotenv from "dotenv";
+import fs from "fs/promises";
 
 test.describe("Integration tests", () => {
   dotenv.config();
@@ -17,6 +18,12 @@ test.describe("Integration tests", () => {
     await logIn.userNameInput.fill(`${process.env.USERNAME}`);
     await logIn.passwordInput.fill(`${process.env.PASSWORD}`);
     await logIn.logInBtn.click();
+
+    // ovo ostavljam sebi za dusu, hvala!
+    // const cookies = await page.context().cookies();
+    // const jsonCookies = JSON.stringify(cookies, null, 2);
+    // fs.writeFile("../LoginAuthCQ.json", jsonCookies);
+
     const checkRequest = await page.waitForRequest((request) =>
       request.url().includes("/check")
     );
