@@ -8,7 +8,7 @@ test.describe("API tests", () => {
     await homepage.goto();
   });
 
-  test("GET request to entires endpoint", async ({ homepage, logIn, page }) => {
+  test("GET request to entires endpoint", async ({ page }) => {
     const response = await page.evaluate(async () => {
       const apiResponse = await fetch("https://api.demoblaze.com/entries");
       return apiResponse.json();
@@ -17,18 +17,14 @@ test.describe("API tests", () => {
     expect(response).toHaveProperty("LastEvaluatedKey");
   });
 
-  test("GET request to entires endpoint - another way", async ({
-    homepage,
-    logIn,
-    request,
-  }) => {
+  test("GET request to entires endpoint - another way", async ({ request }) => {
     const response = await request.get("https://api.demoblaze.com/entries");
     expect(response.status()).toBe(200);
     const data = await response.json();
     expect(data.Items[4].title).toContain("Iphone 6 32gb");
   });
 
-  test("GET request to config.json endpoint", async ({ homepage, page }) => {
+  test("GET request to config.json endpoint", async ({ page }) => {
     const response = await page.evaluate(async () => {
       const apiResponse = await fetch("https://www.demoblaze.com/config.json");
       return apiResponse.json();
