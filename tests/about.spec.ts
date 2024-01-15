@@ -6,8 +6,9 @@ test.describe("About modal", () => {
     await homepage.goto();
   });
 
-  test("Verify elements on About modal", async ({ homepage }) => {
+  test("Verify visibility of the modal", async ({ homepage, about }) => {
     await homepage.aboutBtn.click();
+    await expect(about.modalDialog).toBeVisible();
     //await expect(about.modalDialog).toHaveScreenshot("about-modal.png");
   });
   test("Verify that the modal can be closed on Close and X button", async ({

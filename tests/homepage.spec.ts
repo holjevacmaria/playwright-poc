@@ -31,12 +31,19 @@ test.describe("Homepage", () => {
     homepage,
   }) => {
     await homepage.categories.click();
+    await expect(homepage.laptopProduct).toBeVisible();
     //await expect(homepage.productItems).toHaveScreenshot("all-items.png");
     await homepage.phonesCategory.click();
+    await expect(homepage.phoneProduct).toBeVisible();
+    await expect(homepage.laptopProduct).not.toBeVisible();
     //await expect(homepage.productItems).toHaveScreenshot("phone-items.png");
     await homepage.laptopsCategory.click();
+    await expect(homepage.phoneProduct).not.toBeVisible();
+    await expect(homepage.laptopProduct).toBeVisible();
     // await expect(homepage.productItems).toHaveScreenshot("laptop-items.png");
     await homepage.monitorsCategory.click();
+    await expect(homepage.monitorProduct).toBeVisible();
+    await expect(homepage.phoneProduct).not.toBeVisible();
     // await expect(homepage.productItems).toHaveScreenshot("monitor-items.png");
   });
 

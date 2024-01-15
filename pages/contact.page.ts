@@ -12,7 +12,7 @@ export class Contact {
 
   constructor(page: Page) {
     this.page = page;
-    this.contactModal = page.locator("#exampleModal");
+    this.contactModal = page.locator("div.modal-content").first();
     this.emailInput = page.locator("#recipient-email");
     this.nameInput = page.locator("#recipient-name");
     this.msgInput = page.locator("#message-text");

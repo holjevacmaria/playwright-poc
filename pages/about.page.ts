@@ -8,7 +8,7 @@ export class About {
 
   constructor(page: Page) {
     this.page = page;
-    this.modalDialog = page.locator("div#videoModal");
+    this.modalDialog = page.locator("div.modal-content").nth(3);
     this.modalCloseBtn = page
       .locator("#videoModal")
       .getByText("Close", { exact: true });
