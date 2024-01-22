@@ -1,6 +1,6 @@
 # About this project - Automated testing using Playwright
 
-- The purpouse of this project was not to automate every scenario there is on the page, but to showcase Playwrights capabilities and to get familiar with the tool.
+- The purpouse of this project was to showcase Playwrights capabilities and to get familiar with the tool (not to automate every scenario there is on the page).
 - The web page that was used for automated testing is https://www.demoblaze.com/.
   - This web page has some basic web shop capabilities, such as products, categories, adding to cart, checkout, log in, sign up etc.
 
